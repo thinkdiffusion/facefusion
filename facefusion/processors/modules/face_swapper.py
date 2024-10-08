@@ -314,12 +314,12 @@ def get_model_options() -> ModelOptions:
 
 
 def register_args(program : ArgumentParser) -> None:
-	group_processors = find_argument_group(program, 'processors')
-	if group_processors:
-		group_processors.add_argument('--face-swapper-model', help = wording.get('help.face_swapper_model'), default = config.get_str_value('processors.face_swapper_model', 'inswapper_128_fp16'), choices = processors_choices.face_swapper_set.keys())
-		face_swapper_pixel_boost_choices = suggest_face_swapper_pixel_boost_choices(program)
-		group_processors.add_argument('--face-swapper-pixel-boost', help = wording.get('help.face_swapper_pixel_boost'), default = config.get_str_value('processors.face_swapper_pixel_boost', get_first(face_swapper_pixel_boost_choices)), choices = face_swapper_pixel_boost_choices)
-		facefusion.jobs.job_store.register_step_keys([ 'face_swapper_model', 'face_swapper_pixel_boost' ])
+    group_processors = find_argument_group(program, 'processors')
+    if group_processors:
+        group_processors.add_argument('--face-swapper-model', help = wording.get('help.face_swapper_model'), default = config.get_str_value('processors.face_swapper_model', 'simswap_256'), choices = processors_choices.face_swapper_set.keys())
+        face_swapper_pixel_boost_choices = suggest_face_swapper_pixel_boost_choices(program)
+        group_processors.add_argument('--face-swapper-pixel-boost', help = wording.get('help.face_swapper_pixel_boost'), default = config.get_str_value('processors.face_swapper_pixel_boost', get_first(face_swapper_pixel_boost_choices)), choices = face_swapper_pixel_boost_choices)
+        facefusion.jobs.job_store.register_step_keys([ 'face_swapper_model', 'face_swapper_pixel_boost' ])
 
 
 def apply_args(args : Args, apply_state_item : ApplyStateItem) -> None:
